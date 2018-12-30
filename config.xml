@@ -3,11 +3,7 @@
   <description>Change Your Life Program</description>
   <author href="http://apps.cyl-pro.com" email="admin@cyl-pro.com">Admin CYLPro</author>
   <content src="index.html"/>
-  
-   <config-file mode="merge" parent="/manifest/application" platform="android">
-        <uses-permission android:name="android.permission.INTERNET" />
-    </config-file>
-
+ 
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="permissions" value="none" />
   <preference name="orientation" value="portrait" />
