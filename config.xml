@@ -23,6 +23,16 @@
    <uses-permission android:name="android.permission.INTERNET" />
  </config-file>
 
+<allow-navigation href="http://cordova.apache.org/" />
+<allow-navigation href="https://slack.cordova.io" />
+<allow-navigation href="http://www.google-analytics.com/" />
+<allow-navigation href="https://*.imgur.com/" />
+<allow-navigation href="https://*.twitter.com/" />
+<allow-navigation href="https://*.twimg.com/" />
+<allow-navigation href="http://apps.cyl-pro.com/" />
+<allow-navigation href="https://apps.cyl-pro.com/" />
+<allow-navigation href="https://youtube.com/" />
+<allow-navigation href="https://www.youtube.com/" />
 <access origin="*" />
 <content src="index.html" />
   
