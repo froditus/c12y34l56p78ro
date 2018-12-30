@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.gcpat.mobile" version="0.1" xmlns="http://www.w3.org/ns/widgets">
-  <name>GCPAT-PM</name>
-  <description>PM App Test 1</description>
-  <author email="dev@gcpat.cf" href="http://gcpat.cf">PM App</author>
-  <preference name="phonegap-version" value="cli-6.3.0" />
+  <name>CYLPro</name>
+  <description>Change Your Life Program</description>
+  <author email="admin@cyl-pro.com" href="https://apps.cyl-pro.com">CYLPro</author>
+  <preference name="phonegap-version" value="cli-6.5.0" />
   <preference name="permissions" value="none" />
   <preference name="orientation" value="portrait" />
   <preference name="target-device" value="universal" />
