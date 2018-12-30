@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.gcpat.mobile" version="0.1" xmlns="http://www.w3.org/ns/widgets">
+  <name>GCPAT-PM</name>
+  <description>PM App Test 1</description>
+  <author email="dev@gcpat.cf" href="http://gcpat.cf">PM App</author>
+  <preference name="phonegap-version" value="cli-6.3.0" />
+  <preference name="permissions" value="none" />
+  <preference name="orientation" value="portrait" />
+  <preference name="target-device" value="universal" />
+  <preference name="fullscreen" value="false" />
+
+  <plugin name="cordova-plugin-inappbrowser" spec="1.3.0" />
+  <plugin name="cordova-plugin-device" spec="1.1.2" />
+  <plugin name="cordova-plugin-splashscreen" spec="3.2.2" />
+
+  <icon src="icon.png" />
+  <splash src="splash.png" />
+  
+  <content src="connect-src *" />
+  <access origin="*" />
+  
+  <config-file platform="android" parent="/manifest" mode="merge">
+    <uses-permission android:name="android.permission.INTERNET" />
+  </config-file>
+  
+</widget>
