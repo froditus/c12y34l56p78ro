@@ -3,7 +3,6 @@
     <name>CYLPro</name>  
     <author email="admin@cyl-pro.com" href="https://apps.cyl-pro.com/">Admin CYLPro</author>  
     
-    <preference name="android-minSdkVersion" value="14" />  
     <preference name="phonegap-version" value="cli-6.5.0" />  
     <preference name="orientation" value="portrait" />  
  
@@ -15,7 +14,7 @@
     <icon src="icon.png" />
     <splash src="splash.png" />
     <config-file platform="android" parent="/manifest/application" mode="merge">
-        <activity android:launchMode="singleTop" />
+      <uses-permission android:name="android.permission.INTERNET" />
     </config-file>
 
     <allow-intent href="http://*/*" />  
