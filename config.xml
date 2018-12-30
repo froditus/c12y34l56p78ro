@@ -1,20 +1,30 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="com.cylpro.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://cordova.apache.org/ns/1.0" xmlns:android = "http://schemas.android.com/apk/res/android">
-  <name>CYLPro</name>
-  <description>Change Your Life Program</description>
-  <author email="admin@cyl-pro.com" href="https://apps.cyl-pro.com">CYLPro</author>
-  <preference name="phonegap-version" value="cli-6.5.0" />
-  <preference name="permissions" value="none" />
-  <preference name="orientation" value="portrait" />
-  <preference name="target-device" value="universal" />
-  <preference name="fullscreen" value="false" />
-  <plugin name="cordova-plugin-inappbrowser" spec="1.3.0" />
-  <plugin name="cordova-plugin-device" spec="1.1.2" />
-  <plugin name="cordova-plugin-splashscreen" spec="3.2.2" />
-  <icon src="icon.png" />
-  <splash src="splash.png" />
-  <access origin="*" />
-  <config-file platform="android" parent="/manifest" mode="merge">
-    <uses-permission android:name="android.permission.INTERNET" />
-  </config-file>
+<?xml version='1.0' encoding='utf-8'?>  
+<widget id="com.example.www.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">  
+    <name>CYLPro</name>  
+    <author email="admin@cyl-pro.com" href="https://apps.cyl-pro.com/">Admin CYLPro</author>  
+    
+    <preference name="android-minSdkVersion" value="14" />  
+    <preference name="phonegap-version" value="cli-6.5.0" />  
+    <preference name="orientation" value="portrait" />  
+ 
+    <plugin name="cordova-plugin-splashscreen" source="npm" />  
+    <preference name="SplashScreenDelay" value="3000" />  
+    <preference name="AutoHideSplashScreen" value="true" />  
+    <preference name="SplashMaintainAspectRatio" value="true" />  
+
+    <icon src="icon.png" />
+    <splash src="splash.png" />
+    <config-file platform="android" parent="/manifest/application" mode="merge">
+        <activity android:launchMode="singleTop" />
+    </config-file>
+
+    <allow-intent href="http://*/*" />  
+    <allow-intent href="https://*/*" />  
+    <allow-intent href="tel:*" />  
+    <allow-intent href="sms:*" />  
+    <allow-intent href="mailto:*" />  
+    <allow-intent href="geo:*" />  
+    
+    <content src="index.html" />  
+    
 </widget>
