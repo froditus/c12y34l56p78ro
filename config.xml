@@ -14,8 +14,9 @@
  <preference name="AutoHideSplashScreen" value="true" />  
  <preference name="SplashMaintainAspectRatio" value="true" />  
  
- <plugin name="cordova-plugin-inappbrowser" /> 
- <plugin name="cordova-plugin-splashscreen" source="npm" />  
+ <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
+ <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
+ 
  
  <icon src="icon.png" />
  <splash src="splash.png" />
