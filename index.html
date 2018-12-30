@@ -5,45 +5,43 @@
 <!-- META -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"> 
- <meta charset="utf-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="">
- <script src="http://debug.build.phonegap.com/target/target-script-min.js#12345cp"></script>
 <!-- CSS -->
 <style>
 html,body{
- background-color:#000;
- overflow-y: hidden; 
- overflow-x: hidden;
+	background-color:#000;
+	overflow-y: hidden; 
+	overflow-x: hidden;
 } 
-html, body, div, iframe 
-{
- margin: 0px; 
- padding: 0px; 
- height: 100%; 
- border: none;
+html, body, div, iframe {
+	margin: 0px; 
+	padding: 0px; 
+	height: 100%; 
+	border: none;
 }
 iframe {
- display: block; 
- width: 100%; 
- border: none; 
- overflow-y: auto; 
- overflow-x: hidden;
+	display: block; 
+	width: 100%; 
+	border: none; 
+	overflow-y: auto; 
+	overflow-x: hidden;
 }
+
 </style>
 </head>
 <body>
- <iframe id="indexiframe" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe>
- <script type="text/javascript" src="jquery.js"></script>
- <script type="text/javascript">
-  $(document).ready(function(){
-    $("#indexiframe").attr("src", "https://apps.cyl-pro.com");
-    //alert("loading content");
-  });
-       
-    </script>
-
- </body>
+	<div id="utama" style="display:none">
+		<iframe id="indexiframe" src="https://apps.cyl-pro.com" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe>
+	</div>
+</body>
 </html>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#utama').show();
+	});
+</script>
