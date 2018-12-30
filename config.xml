@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.gcpat.mobile" version="0.1" xmlns="http://www.w3.org/ns/widgets">
+<widget id="com.cylpro.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
   <name>CYLPro</name>
   <description>Change Your Life Program</description>
   <author email="admin@cyl-pro.com" href="https://apps.cyl-pro.com">CYLPro</author>
