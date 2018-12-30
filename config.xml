@@ -3,7 +3,7 @@
   <name>CYLPro</name>
   <description>Change Your Life Program</description>
   <author email="admin@cyl-pro.com" href="https://apps.cyl-pro.com">CYLPro</author>
-   <content src="index.html" />
+ 
   <preference name="phonegap-version" value="cli-8.0.0" />
   <preference name="permissions" value="none" />
   <preference name="orientation" value="portrait" />
@@ -17,16 +17,13 @@
  <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
  <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
  
- 
  <icon src="icon.png" />
  <splash src="splash.png" />
  <config-file platform="android" parent="/manifest/application" mode="merge">
    <uses-permission android:name="android.permission.INTERNET" />
  </config-file>
 
-<allow-navigation href="http://*/*" />
-<allow-navigation href="https://*/*" />
-<allow-navigation href="data:*" />
 <access origin="*" />
-
+<content src="index.html" />
+  
 </widget>
