@@ -22,13 +22,8 @@
    <uses-permission android:name="android.permission.INTERNET" />
  </config-file>
 
-    <allow-intent href="http://*/*" />  
-    <allow-intent href="https://*/*" />  
-    <allow-intent href="tel:*" />  
-    <allow-intent href="sms:*" />  
-    <allow-intent href="mailto:*" />  
-    <allow-intent href="geo:*" />
-    
-   
-    <access origin="*" /> 
+ <allow-navigation href="http://*/*" />
+ <allow-navigation href="https://*/*" />
+ <allow-navigation href="data:*" />
+  
 </widget>
