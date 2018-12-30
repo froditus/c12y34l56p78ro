@@ -3,7 +3,7 @@
   <name>CYLPro</name>
   <description>Change Your Life Program</description>
   <author email="admin@cyl-pro.com" href="https://apps.cyl-pro.com">CYLPro</author>
-  <preference name="phonegap-version" value="cli-6.5.0" />
+  <preference name="phonegap-version" value="cli-8.0.0" />
   <preference name="permissions" value="none" />
   <preference name="orientation" value="portrait" />
   <preference name="target-device" value="universal" />
