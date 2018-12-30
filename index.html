@@ -34,11 +34,11 @@ iframe {
 </style>
 </head>
 <body>
- <iframe frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe>
+ <iframe id="indexiframe" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe>
  <script type="text/javascript" src="jquery.js"></script>
  <script type="text/javascript">
   $(document).ready(function(){
-    $("[name=iframeName]").attr("src", "https://apps.cyl-pro.com");
+    $("#indexiframe").attr("src", "https://apps.cyl-pro.com");
     //alert("loading content");
   });
        
