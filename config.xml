@@ -27,5 +27,5 @@
 <allow-navigation href="https://*/*" />
 <allow-navigation href="data:*" />
 <access origin="*" />
-  
+
 </widget>
