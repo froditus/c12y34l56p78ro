@@ -13,7 +13,6 @@
   <plugin name="cordova-plugin-splashscreen" spec="3.2.2" />
   <icon src="icon.png" />
   <splash src="splash.png" />
-  <content src="connect-src *" />
   <access origin="*" />
   <config-file platform="android" parent="/manifest" mode="merge">
     <uses-permission android:name="android.permission.INTERNET" />
