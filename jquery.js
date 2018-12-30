@@ -269,7 +269,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
 			var text = ''; var cls = ' bar';
 			if(txt && txt !== ''){ text = txt;}
 			if(css && css !== ''){ this.cssClass = ''+css;}
-			var bgprogress = '<div class="progressblock bg '+this.cssClass+' pane" style="z-index:99999999999"></div>';
+			var bgprogress = '<div class="progressblock bg pane" style="z-index:99999999999"></div>';
 			var textprogress = '<span class="progressblock fr '+this.cssClass+'" style="z-index:999999999999"><span>'+text+'</span></span>';
 			$(bgprogress).appendTo('body');
 			$(textprogress).appendTo('body').centerBox();
@@ -318,12 +318,27 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
 				}
 				
 				if(x.status == '1' || x.status == 1 || x.status === true){
-					
+					/*
+					$.app.xInfo('[logo]',x.message,'',function(){
+						if(x.data){
+							var jdata = $.parseJSON(x.data);
+							if(jdata['backlink']){location.href = jdata['backlink'];}
+							return false;
+						}
+					});
+					*/
 				}else{
-					
+					/*
+					$.app.xInfo('[logo]',x.message,'',function(){
+						$.app.xInfoClose();
+						return false;
+					});
+					*/
 				}
 			}).fail(function(xhr,response){
 				console.log('ajax failed');
+				$.app.xInfoClose();
+				$.app.xInfo($.display.infoLogo,'Failed','');
 			});
 		},
 		
@@ -454,15 +469,13 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
 								/**/
 								h+='<div class="xInfo-inner" style="width:300px;background-color:#fff;margin:0 auto;border:solid 1px #eee;box-shadow: 0 4px 2px -2px #ccc;">'
 									h+= xtitle
-									h+='<div class="info-body-content" style="padding:10px;color:#555;">';
-										if(param.icon !== ''){
-											h+='<span style="display:block;padding:10px;">'+param.icon+'</span>';
-										}
-										h+='<span style="display:block;padding:10px;color:#555;">'+xcontent+'</span>'
+									h+='<div id="info-body-content" style="min-height:50px;padding:10px;color:#555;">'
+										+'<span style="display:block;padding:10px;">'+param.icon+'</span>'
+										+'<span style="display:block;padding:10px;color:#555;">'+xcontent+'</span>'
 									+'</div>';
 									
 									if(param.nobuttons === false){
-									h+='<div class="info-footer" style="padding:10px 10px 20px 10px">';
+									h+='<div style="padding:10px 10px 20px 10px">';
 									if(param.buttons && $.isArray(param.buttons)){
 										h+=$this.set_buttons(param.buttons);
 									}
@@ -476,18 +489,17 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
 			+'</div>';
 			//$('body').css('overflow','hidden');
 			$('body').prepend(h);
-						
-			if(param.buttons && $.isArray(param.buttons)){
-				$.each(param.buttons,function(a,b){
-					
-					if($('button#xinfo-'+b[0]).length){
-						$('button#xinfo-'+b[0]).unbind('click').on('click',function(){
-							if(param['on'+b[0]] && typeof param['on'+b[0]] === 'function'){ param['on'+b[0]]();return false;}
-						})
-					}
-					
-				});
+			if($('button#xinfo-Yes').length){
+				$('button#xinfo-Yes').unbind('click').on('click',function(){
+					if(param.onYes && typeof param.onYes === 'function'){ param.onYes();return false;}
+				})
 			}
+			
+			if($('button#xinfo-No').length){
+				$('button#xinfo-No').unbind('click').on('click',function(){
+					if(param.onNo && typeof param.onNo === 'function'){ param.onNo();return false;}
+				})
+			}	
 		},
 		
 		close: function(){
@@ -754,254 +766,6 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
 				}
 				if(callback){ if(typeof callback === 'function'){ callback($(this)); return false; } }
 			});
-		},
-		
-		
-		youtube: function(youtubeUrl,iframeID){
-			
-			function youtube_parser(url){
-				var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-				var match = url.match(regExp);
-				return (match&&match[7].length==11)? match[7] : false;
-			}
-			
-			var youtubeID = youtube_parser(youtubeUrl);
-			
-			var delay = (function() {
-				var timer = 0;
-				return function(callback, ms) {
-					clearTimeout(timer);
-					timer = setTimeout(callback, ms);
-				};
-			})();
-			
-			//delay(function() {
-				var videoID = youtubeID;
-				var videos = "https://www.googleapis.com/youtube/v3/videos";
-				var apiKey = "AIzaSyAjICZkZdj0XVlyKw2WPwoWEF3jZFEJ-BE"; // Insert here your api key
-				var fieldsTitle = "fields=items(snippet(title))";
-				var fieldsEmpty = "";
-				var part = "part=snippet";
-				function getUrl(fields) {
-					var url = videos + "?" + "key=" + apiKey + "&" + "id=" + videoID + "&" + fields + "&" + part;
-					return url;
-				}
-				$.get(getUrl(fieldsEmpty), function(response) {
-					var status = response.pageInfo.totalResults;
-					var title;
-					if (status) {
-						$.get(getUrl(fieldsTitle), function(response) {
-							title = response.items[0].snippet.title;
-							//$('#info').text(title);
-							//console.log(title);
-							
-							var aspectRatio = 1.78;
-							var video = $('#'+iframeID);
-							var videoHeight = video.outerHeight();
-							var newWidth = videoHeight*aspectRatio;
-							var x = (((newWidth-videoHeight)/aspectRatio)/2);
-							var halfNewWidth = newWidth/2;
-							//var section_width = newWidth+x;
-							var section_width = $('section').outerWidth();
-							$('.video-container').css({"width":(section_width)+"px","border":"none"});
-							
-							var url = "https://www.youtube.com/embed/" + videoID;
-							url+='?color=white&controls=1&fs=1&rel=0&iv_load_policy=3&modestbranding=1&showinfo=0';
-							$('#'+iframeID).attr('src', url);
-							
-							
-							
-						})
-					} else {
-						title = "Video doesn't exist";
-						//$('#info').text(title);
-						console.log(title);
-						$('#'+iframeID).attr('src', "");
-					}
-				});
-			//}, 1000);
-			
-		},
-		
-		info: function(m){
-			$.Info.open({
-				title:'Info',
-				content:m,
-				buttons:[['Yes']]
-			});
-		}
-		
-	})
-	
-	
-	$.calendar = $.extend({}, {
-		today: '',
-		selected_day: '',
-		selected_month: '',
-		first_day : '',
-		day_name : '',
-		day_no : '',
-		days : '',
-		month_name : '',
-		month : '',
-		year : '',
-		first_date : '',
-		openNextBigMonth : true,
-		clickOnDay: true,
-		fnDay: function(){},
-		fnMon: function(){},
-		
-		open: function(callback){
-			
-		},
-		
-		init: function(dx,callback){
-			var $this = this;
-			//var d = new Date();
-			
-			var d = dx && dx !== 'x' ? new Date(dx) : new Date();
-			//console.log(d);
-			this.month_name = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-			this.month = d.getMonth();   //0-11
-			
-			this.year = d.getFullYear(); //2014
-			this.first_date = this.month_name[this.month] + " " + 1 + " " + this.year;
-			//September 1 2014
-			var tmp = new Date(this.first_date).toDateString();
-			//Mon Sep 01 2014 ...
-			this.first_day = tmp.substring(0, 3);    //Mon
-			this.day_name = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-			this.day_no = this.day_name.indexOf(this.first_day);   //1
-			this.days = new Date(this.year, this.month+1, 0).getDate();    //30
-			
-			this.render();
-			$this.fnDay(0);
-			$('#prev-month').unbind('click').on('click',function(){
-				var l_month = ($this.month+1)-1;
-				var month = l_month <= 0 ? 12 : l_month;
-				var year = l_month <= 0 ? ($this.year-1) : $this.year;
-				var new_month = year +'-'+ month;
-				$.calendar.init(new_month);
-				//if(callback && typeof callback == 'function'){callback(new_month);}
-				$this.fnMon(new_month);
-			});
-			
-			$('#next-month').unbind('click').on('click',function(){
-				var n_month = ($this.month+1)+1;
-				var month = n_month > 12 ? 1 : n_month;
-				var year = n_month > 12 ? ($this.year+1) : $this.year;
-				var new_month = year +'-'+ month;
-				
-				if(year > $this.year){
-					if($this.openNextBigMonth == false){return false;}
-				}else{
-					if(year == $this.year){
-						var skrg = new Date();
-						var month_now = skrg.getMonth()+1;
-						//console.log(month_now +' | '+n_month);
-						//if($this.openNextBigMonth == false){return false;}
-					}
-				}
-				
-				$.calendar.init(new_month);
-				//if(callback && typeof callback == 'function'){callback(new_month);}
-				$this.fnMon(new_month);
-			});
-			
-			$('.td-calendar-days').unbind('click').on('click',function(){
-				var tgl = $(this).prop('id');
-				if($this.clickOnDay === true){
-					$this.fnDay(tgl);
-				}
-			});
-		},
-		
-		render: function(){
-			
-			var $this = this;
-			document.getElementById("calendar-dates").innerHTML = "";
-			var curMonth = ($this.month < 10 ? '0'+($this.month+1) : ($this.month+1))
-			var YearMonth = $this.year+'-'+curMonth;
-			
-			$this.selected_month = $this.year+'-'+($this.month+1);
-			
-			var MYtitle = this.month_name[this.month]+" "+this.year;
-			document.getElementById("calendar-month-year").innerHTML = '&nbsp;' + MYtitle + '<input type="hidden" id="calendar-active-month-year" value="'+YearMonth+'" />';
-			
-			var calendar = this.get_calendar(this.day_no, this.days);
-			document.getElementById("calendar-dates").appendChild(calendar);
-		},
-		
-		get_calendar: function(){
-			var $this = this;
-			var curMonth = ($this.month < 10 ? '0'+($this.month+1) : ($this.month+1))
-			var YearDate = $this.year+'-'+curMonth+'-';
-			var table = document.createElement('table');
-			var tr = document.createElement('tr');
-			
-			//row for the day letters
-			for(var c=0; c<=6; c++){
-				var th = document.createElement('th');
-				//th.innerHTML = "SMTWTFS"[c];
-				th.innerHTML = $this.day_name[c];
-				tr.appendChild(th);
-			}
-			table.appendChild(tr);
-			
-			//create 2nd row
-			tr = document.createElement('tr');
-			var c;
-			for(c=0; c<=6; c++){
-				if(c == $this.day_no){break;}
-				var td = document.createElement('td');
-				td.innerHTML = "";
-				tr.appendChild(td);
-			}
-			
-			var count = 1;
-			var locale = "en-us";
-			var d = new Date();
-			var today = new Date().toJSON().slice(0,10);
-			
-			for(; c<=6; c++){
-				var td = document.createElement('td');
-				var td_id = YearDate+(count <= 9 ? '0'+count : count);
-				if(today == td_id){
-					td.setAttribute('class',"td-calendar-days today");
-				}else{
-					td.setAttribute('class',"td-calendar-days");
-				}
-				td.setAttribute('id',td_id);
-				td.innerHTML = '<span class="day-number">'+(count < 10 ? '0'+count : count)+'</span>';
-				count++;
-				tr.appendChild(td);
-			}
-			table.appendChild(tr);
-			
-			//rest of the date rows
-			for(var r=3; r<=7; r++){
-				tr = document.createElement('tr');
-				for(var c=0; c<=6; c++){
-					if(count > $this.days){
-						table.appendChild(tr);
-						return table;
-					}
-					var td = document.createElement('td');
-					var td_id = YearDate+(count <= 9 ? '0'+count : count);
-					if(today == td_id){
-						td.setAttribute('class',"td-calendar-days today");
-					}else{
-						td.setAttribute('class',"td-calendar-days");
-					}
-					
-					td.setAttribute('id',td_id);
-					td.innerHTML = '<span class="day-number">'+(count < 10 ? '0'+count : count)+'</span>';
-					count++;
-					tr.appendChild(td);
-				}
-				table.appendChild(tr);
-			}
-			return table;
 		}
 	})
 	
